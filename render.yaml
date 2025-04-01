@@ -1,20 +1,16 @@
 services:
   - type: static
     name: portfolio
-    buildCommand: npm run install-deps && npm run build
-    publishDir: client/build
+    rootDir: client
+    buildCommand: npm ci && npm run build
+    publishDir: build
     envVars:
       - key: NODE_ENV
         value: production
       - key: NODE_VERSION
-        value: 18.0.0
+        value: 18.x
       - key: CI
         value: false
-    headers:
-      - source: /*
-        headers:
-          - key: Cache-Control
-            value: no-cache
     routes:
       - type: rewrite
         source: /*
